@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+
+import Drawer from './components/Drawer';
+import UserActivities from './pages/UserActivities';
+import UserDashboard from './pages/UserDashboard';
+import ScreenMonitoring from './pages/ScreenMonitoring';
+import MainPage from './pages/MainPage';
+
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Drawer />
+
+      <Switch>
+        <Route to='/' exact>
+          <MainPage />
+        </Route>
+        <Route path='/useractivities' exact>
+          <UserActivities />
+        </Route>
+        <Route path='/userdashboard' exact>
+          <UserDashboard />
+        </Route>
+        <Route path='/sm' exact>
+          <ScreenMonitoring />
+        </Route>
+        <Redirect to='/' />
+
+      </Switch>
+
+    </Router>
   );
-}
+};
 
 export default App;
